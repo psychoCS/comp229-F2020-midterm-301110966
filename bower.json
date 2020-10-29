@@ -1,9 +1,9 @@
 {
-  "name": "comp308-w2020-midterm-301110966",
+  "name": "comp308-w2017-midterm",
   "description": "## Welcome to the MidTerm Project - the Favourite Book List App",
   "main": "server.js",
   "authors": [
-    "Tom Tsiliopoulos & Thiago Luiz Batist"
+    "Tom Tsiliopoulos"
   ],
   "license": "ISC",
   "keywords": [

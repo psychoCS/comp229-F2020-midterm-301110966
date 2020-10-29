@@ -12,4 +12,4 @@ let Book = mongoose.Schema({
   collection: "books"
 });
 
-module.exports.Model = mongoose.model('Book', Book);
+module.exports = mongoose.model('Book', Book);
