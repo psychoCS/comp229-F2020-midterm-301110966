@@ -3,7 +3,7 @@
   Fall 2020 - Midterm test
   Thiago Luiz Batista - Student Number 301110966
   Work completed on 30/10/2020
-  books.js Midterm File
+  index.ejs Midterm File
 -->
 
 
@@ -14,9 +14,9 @@
       <div class="row">
         <div class="col-md-offset-1 col-md-10">
           <h3>Favourite Books List </h3>
-          <!-- ------------------------ -->
-          <!-- FIX THE ADD BUTTON BELOW -->
-          <!-- ------------------------ -->
+          <!-- ---------------------------------------------------------------- -->
+          <!-- FIXED THE ADD BUTTON BELOW by referencing it to the correct path -->
+          <!-- ---------------------------------------------------------------- -->
           <a href="/books/add" class="btn btn-primary"><i class="fa fa-plus"></i> Add a book</a>
           <br>
           <div class="table-responsive">
@@ -39,6 +39,7 @@
                 <% for(let count=0; count < books.length; count++) { %>
                 
                 <tr>
+                  <!-- inserted the objects values with the for formula -->
                   <td class="text-center"><%= books[count].Title %></td>
                   <td class="text-center"><%= books[count].Description %></td>
                   <td class="text-center"><%= books[count].Price %></td>
@@ -46,10 +47,12 @@
                   <td class="text-center"><%= books[count].Genre %></td>
                   
                   <td class="text-center">
+                    <!-- Edit button created with the path to the details + objectsID -->
                     <a href="/books/edit/<%= books[count]._id %>" class="btn btn-success btn-sm "><i class="fa fa-wrench"></i> Edit</a>
                   </td>
 
                   <td class="text-center">
+                    <!-- Delete button created that will delete using objectsID -->
                     <a href="/books/delete/<%= books[count]._id %>" class="btn btn-danger btn-sm">
                     <i class="fas fa-trash-alt"></i> Delete</a>
                   </td>

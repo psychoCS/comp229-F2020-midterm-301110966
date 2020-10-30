@@ -35,6 +35,8 @@ router.get('/', (req, res, next) => {
 
 //  GET the Book Details page in order to add a new Book
 router.get('/add', (req, res, next) => {
+  
+  // Create the blank values object
   let blankBook = book({
       "Title": " ",
       "Price": " ",
@@ -42,12 +44,14 @@ router.get('/add', (req, res, next) => {
       "Genre": " " 
     });
   
+  // Render the details page the with blank values
   res.render('../views/books/details', { title: 'Add Book', books: blankBook });
 });
 
 // POST process the Book Details page and create a new Book - CREATE
 router.post('/add', (req, res, next) => {
   
+  // Pick the inserted values
   let newBook = book({
     "Title": req.body.title,
     "Price": req.body.price,
@@ -55,6 +59,7 @@ router.post('/add', (req, res, next) => {
     "Genre": req.body.genre          
   });
   
+  // Create a new object with it
   book.create(newBook, (err, books) => {
     if(err)
     {
@@ -73,13 +78,14 @@ router.post('/add', (req, res, next) => {
 router.get('/edit/:id', (req, res, next) => {
 let id = req.params.id;
 
+  // Select the object by it's ID
   book.findById(id, (err, bookToEdit) => {
     if(err)
     {
       console.log(err);
       res.end(err);
     }
-      //show the edited view
+      // Render the details page with that object's values
     res.render('../views/books/details', { title: 'Edit Book', books: bookToEdit });
   });
 });
@@ -88,6 +94,7 @@ let id = req.params.id;
 router.post('/edit/:id', (req, res, next) => {
   let id = req.params.id;
 
+  // Pick the objects new values
   let updatedBook = book({
     "_id": id,
     "Title": req.body.title,
@@ -97,6 +104,7 @@ router.post('/edit/:id', (req, res, next) => {
     "Genre": req.body.genre 
   });
 
+  // Update the object
   book.updateOne({_id: id}, updatedBook, (err) => {
     if(err)
     {
@@ -112,6 +120,7 @@ router.post('/edit/:id', (req, res, next) => {
 router.get('/delete/:id', (req, res, next) => {
 let id = req.params.id;
 
+  // Delete chosen object
   book.remove({_id: id}, (err) => {
     if(err)
     {
