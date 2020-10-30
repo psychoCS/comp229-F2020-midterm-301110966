@@ -1,3 +1,11 @@
+/* 
+  COMP 229 - Web Application Development (SEC. 003)
+  Fall 2020 - Midterm test
+  Thiago Luiz Batista - Student Number 301110966
+  Work completed on 30/10/2020
+  books.js Midterm File
+*/
+
 // modules required for routing
 let express = require('express');
 let router = express.Router();
@@ -27,20 +35,27 @@ router.get('/', (req, res, next) => {
 
 //  GET the Book Details page in order to add a new Book
 router.get('/add', (req, res, next) => {
-  res.render('../views/books/add', { title: 'Add Book'});
+  let blankBook = book({
+      "title": " ",
+      "price": " ",
+      "author": " ",
+      "genre": " " 
+    });
+  
+  res.render('../views/books/details', { title: 'Add Book', books: blankBook });
 });
 
 // POST process the Book Details page and create a new Book - CREATE
 router.post('/add', (req, res, next) => {
-  let newBook = book({
+  
+  let Book = book({
     "title": req.body.title,
-    "description": req.body.description,
     "price": req.body.price,
     "author": req.body.author,
     "genre": req.body.genre          
   });
 
-  book.create(newBook, (err, books) =>{
+  book.create(Book, (err, book) => {
     if(err)
     {
       console.log(err);
