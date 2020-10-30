@@ -36,10 +36,10 @@ router.get('/', (req, res, next) => {
 //  GET the Book Details page in order to add a new Book
 router.get('/add', (req, res, next) => {
   let blankBook = book({
-      "title": " ",
-      "price": " ",
-      "author": " ",
-      "genre": " " 
+      "Title": " ",
+      "Price": " ",
+      "Author": " ",
+      "Genre": " " 
     });
   
   res.render('../views/books/details', { title: 'Add Book', books: blankBook });
@@ -48,14 +48,14 @@ router.get('/add', (req, res, next) => {
 // POST process the Book Details page and create a new Book - CREATE
 router.post('/add', (req, res, next) => {
   
-  let Book = book({
-    "title": req.body.title,
-    "price": req.body.price,
-    "author": req.body.author,
-    "genre": req.body.genre          
+  let newBook = book({
+    "Title": req.body.title,
+    "Price": req.body.price,
+    "Author": req.body.author,
+    "Genre": req.body.genre          
   });
-
-  book.create(Book, (err, book) => {
+  
+  book.create(newBook, (err, books) => {
     if(err)
     {
       console.log(err);
@@ -90,11 +90,11 @@ router.post('/edit/:id', (req, res, next) => {
 
   let updatedBook = book({
     "_id": id,
-    "title": req.body.title,
-    "description": req.body.description,
-    "price": req.body.price,
-    "author": req.body.author,
-    "genre": req.body.genre 
+    "Title": req.body.title,
+    "Description": req.body.description,
+    "Price": req.body.price,
+    "Author": req.body.author,
+    "Genre": req.body.genre 
   });
 
   book.updateOne({_id: id}, updatedBook, (err) => {
