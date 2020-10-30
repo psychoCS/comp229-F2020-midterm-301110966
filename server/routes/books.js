@@ -27,7 +27,7 @@ router.get('/', (req, res, next) => {
 
 //  GET the Book Details page in order to add a new Book
 router.get('/add', (req, res, next) => {
-  res.render('books', { title: 'Add Book' })
+  res.render('../views/books/add', { title: 'Add Book'});
 });
 
 // POST process the Book Details page and create a new Book - CREATE
@@ -37,10 +37,10 @@ router.post('/add', (req, res, next) => {
     "description": req.body.description,
     "price": req.body.price,
     "author": req.body.author,
-    "published": req.body.published          
+    "genre": req.body.genre          
   });
 
-  book.create(newBook, (err, book) =>{
+  book.create(newBook, (err, books) =>{
     if(err)
     {
       console.log(err);
@@ -62,19 +62,16 @@ let id = req.params.id;
     if(err)
     {
       console.log(err);
-    res.end(err);
+      res.end(err);
     }
-    else
-    {
-    //show the edit view
-      res.render('books/details', {title: 'Edit Book', book: bookToEdit})
-    }
+      //show the edited view
+    res.render('../views/books/details', { title: 'Edit Book', books: bookToEdit });
   });
 });
 
 // POST - process the information passed from the details form and update the document
 router.post('/edit/:id', (req, res, next) => {
-  let id = req.params.id
+  let id = req.params.id;
 
   let updatedBook = book({
     "_id": id,
@@ -82,7 +79,7 @@ router.post('/edit/:id', (req, res, next) => {
     "description": req.body.description,
     "price": req.body.price,
     "author": req.body.author,
-    "published": req.body.published 
+    "genre": req.body.genre 
   });
 
   book.updateOne({_id: id}, updatedBook, (err) => {
@@ -91,11 +88,8 @@ router.post('/edit/:id', (req, res, next) => {
       console.log(err);
       res.end(err);
     }
-    else
-    {
     // refresh the book list
-    res.redirect('books/details');
-    }
+    res.redirect('/books');
   });
 });
 
@@ -112,7 +106,7 @@ let id = req.params.id;
     else
     {
     // refresh the book list
-    res.redirect('books/details');
+    res.redirect('/books');
     }
   });
 });

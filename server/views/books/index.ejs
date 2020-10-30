@@ -16,22 +16,23 @@
               <thead>
                 <tr>
                   <th class="text-center">Title</th>
-                  <th class="text-center">Price</th>
                   <th class="text-center">Description</th>
+                  <th class="text-center">Price</th>                  
                   <th class="text-center">Author</th>
                   <th class="text-center">Genre</th>
                   <th class="text-center">Edit</th>
                   <th class="text-center">Delete</th>                  
-                  
                 </tr>
-                </thead>
-                <tbody>
+              </thead>
+
+              <tbody>
                 <!-- Template Row -->
-                <% for (let count = 0; count < books.length; count++) { %>
+                <% for(let count=0; count < books.length; count++) { %>
+                
                 <tr>
-                  <td><%= books[count].Title %></td>
-                  <td class="text-center">$<%= books[count].Price %></td>
-                  <td class="text-center">$<%= books[count].Description %></td>
+                  <td class="text-center"><%= books[count].Title %></td>
+                  <td class="text-center"><%= books[count].Description %></td>
+                  <td class="text-center"><%= books[count].Price %></td>
                   <td class="text-center"><%= books[count].Author %></td>
                   <td class="text-center"><%= books[count].Genre %></td>
                   
@@ -45,6 +46,7 @@
                   </td>
                 </tr>
                 <% } %>
+                
               </tbody>
             </table>
           </div>
