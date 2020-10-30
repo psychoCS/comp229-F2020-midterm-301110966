@@ -11,15 +11,18 @@
           <a href="/books/add" class="btn btn-primary"><i class="fa fa-plus"></i> Add a book</a>
           <br>
           <div class="table-responsive">
+          
             <table class="table table-bordered table-striped table-hover">
               <thead>
                 <tr>
-                  <th>Title</th>
+                  <th class="text-center">Title</th>
                   <th class="text-center">Price</th>
+                  <th class="text-center">Description</th>
                   <th class="text-center">Author</th>
                   <th class="text-center">Genre</th>
-                  <th class="text-center"></th>
-                  <th class="text-center"></th>
+                  <th class="text-center">Edit</th>
+                  <th class="text-center">Delete</th>                  
+                  
                 </tr>
                 </thead>
                 <tbody>
@@ -28,19 +31,17 @@
                 <tr>
                   <td><%= books[count].Title %></td>
                   <td class="text-center">$<%= books[count].Price %></td>
+                  <td class="text-center">$<%= books[count].Description %></td>
                   <td class="text-center"><%= books[count].Author %></td>
                   <td class="text-center"><%= books[count].Genre %></td>
-
+                  
                   <td class="text-center">
-                    <!-- ------------------------ -->
-                    <!-- ADD the EDIT BUTTON HERE -->
-                    <!-- ------------------------ -->
+                    <a href="/books/edit/<%= books[count]._id %>" class="btn btn-success btn-sm "><i class="fa fa-wrench"></i> Edit</a>
                   </td>
 
                   <td class="text-center">
-                    <!-- ------------------------ -->
-                    <!-- ADD the DELETE BUTTON HERE -->
-                    <!-- ------------------------ -->
+                    <a href="/books/delete/<%= books[count]._id %>" class="btn btn-danger btn-sm">
+                    <i class="fas fa-trash-alt"></i> Delete</a>
                   </td>
                 </tr>
                 <% } %>

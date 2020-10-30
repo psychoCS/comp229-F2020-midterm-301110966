@@ -10,12 +10,24 @@ let mongoose = require('mongoose');
 // URI
 let DB = require('./db');
 
-mongoose.connect(process.env.URI || DB.URI, {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(DB.URL, {useNewUrlParser: true, useUnifiedTopology: true})
+let dbConnection = mongoose.connection; // alias
 
-let mongoDB = mongoose.connection;
-mongoDB.on('error', console.error.bind(console, 'Connection Error:'));
-mongoDB.once('open', ()=> {
-  console.log("Connected to MongoDB...");
+dbConnection.on('error', console.error.bind(console, 'Connection Error:'));
+dbConnection.once('open', ()=>{
+  console.log('Connection OPEN...');
+});
+
+dbConnection.once('connected', ()=>{
+  console.log('MondoDB CONNECTED...');
+});
+
+dbConnection.on('disconnected', ()=>{
+  console.log('Connection with MondoDB CLOSED...');
+});
+
+dbConnection.on('reconnected', ()=>{
+  console.log('Connection with MondoDB REOPEN...');
 });
 
 
@@ -55,7 +67,9 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', {
+    title: 'Error'
+  });
 });
 
 module.exports = app;
